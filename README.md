@@ -1,6 +1,6 @@
-# Started exploring zustand
+# Started exploring zustand and react query
 
 #projects in this repo
-1.a counter
-2.simple to_do app
+  ##.a counter
+  ##.simple to_do app
 
