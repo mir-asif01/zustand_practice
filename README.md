@@ -1,6 +1,6 @@
-# Started exploring zustand and react query
+# Started exploring {zustand}, {react query} and {jwt/jsonWebToken}
 
 #projects in this repo
-  ##.a counter
-  ##.simple to_do app
+  * a counter app
+  * very simple full stack to do listing app
 
