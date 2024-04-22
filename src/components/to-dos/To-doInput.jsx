@@ -5,13 +5,25 @@ function To_doInput() {
     const handleInput = (e) => {
         e.preventDefault()
         const title = e.target.title.value
-        // const description = e.target.description.value
+        const description = e.target.description.value
+        const completed = false
         const t = {
-            id: Math.ceil(Math.random() * 100),
             title,
-            // description
+            description,
+            completed
         }
+        console.log(t);
         addToDo(t)
+
+        fetch(`http://localhost:4000/todo`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(t)
+        }).then(res => res.json())
+            .then(res => { })
+
         e.target.reset()
     }
 
@@ -20,7 +32,7 @@ function To_doInput() {
 
             <form onSubmit={handleInput} className="flex flex-col justify-between gap-1">
                 <input type="text" name="title" className="outline-none px-2 py-1 border border-pink-500" placeholder="title" />
-                {/* <input type="text" name="description" className="outline-none px-2 py-1 border border-pink-500" placeholder="description" /> */}
+                <input type="text" name="description" className="outline-none px-2 py-1 border border-pink-500" placeholder="description" />
                 <button type="submit" className="bg-pink-500 px-1 py-1 text-white">Add</button>
             </form>
         </div>

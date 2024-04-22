@@ -10,7 +10,11 @@ const to_doStore = create((set) => ({
     },
     setTodos: (to_dos) => {
         set(state => ({ to_dos: [...to_dos] }))
-    }
+    },
+    clearTodos: () => {
+        set(() => ({ to_dos: [] }))
+    },
+
 }))
 
 
