@@ -14,7 +14,9 @@ const to_doStore = create((set) => ({
     clearTodos: () => {
         set(() => ({ to_dos: [] }))
     },
-
+    updateCompleted: (_id, updatedStatus) => {
+        set(state => ({ to_dos: state.to_dos.map(td => td._id === _id ? { ...td, completed: updatedStatus } : td) }))
+    }
 }))
 
 
