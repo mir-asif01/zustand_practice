@@ -1,26 +1,34 @@
+import { useMutation } from "@tanstack/react-query";
 import to_doStore from "../../store/to_doStore";
 
 function To_do({ t }) {
     const { _id, title, description, completed } = t
     const deleteToDo = to_doStore((state) => state.deleteToDo)
     const updateCompleted = to_doStore(state => state.updateCompleted)
-    const deleteHandler = (_id) => {
-        deleteToDo(_id)
-        fetch(`http://localhost:4000/todo/${_id}`, {
+
+
+    const { mutate: deleteSingleToDo } = useMutation({
+        mutationFn: (_id) => fetch(`http://localhost:4000/todo/${_id}`, {
             method: "DELETE",
         })
-
+    })
+    const deleteHandler = (_id) => {
+        deleteToDo(_id)
+        deleteSingleToDo(_id)
     }
+
+    const { mutate: updateCompleteStatus } = useMutation({
+        mutationFn: (_id) => fetch(`http://localhost:4000/todo/${_id}`, {
+            method: "PUT",
+        }).then(res => res.json())
+    })
+
     const handleComplete = (_id) => {
         const updatedStatus = {
             status: true
         }
         updateCompleted(_id, updatedStatus)
-
-        fetch(`http://localhost:4000/todo/${_id}`, {
-            method: "PUT",
-        }).then(res => res.json())
-            .then(res => { })
+        updateCompleteStatus(_id)
     }
     return (
         <li key={_id} className="flex justify-between items-center my-2">
